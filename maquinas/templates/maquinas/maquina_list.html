@@ -1,0 +1,53 @@
+{% extends 'maquinas/base.html' %}
+{% block content %}
+    <h2>Máquinas Cadastradas</h2>
+    <a href="{% url 'maquina_create' %}" class="btn btn-success mb-3">Nova Máquina</a>
+    <form method="get" class="row mb-3">
+    <div class="col-md-4">
+        <select name="status" class="form-select">
+            <option value="">Todos os Status</option>
+            <option value="ativa">Ativa</option>
+            <option value="manutencao">Manutenção</option>
+            <option value="fora">Fora de Uso</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <select name="setor" class="form-select">
+            <option value="">Todos os Setores</option>
+            {% for s in setores %}
+            <option value="{{ s.id }}">{{ s.nome }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-primary" type="submit">Filtrar</button>
+    </div>
+</form>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nº Patrimônio</th>
+                <th>Nome</th>
+                <th>Setor</th>
+                <th>Status</th>
+                <th>Detalhes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for maquina in maquinas %}
+            <tr>
+                <td>{{ maquina.numero_patrimonio }}</td>
+                <td>{{ maquina.nome }}</td>
+                <td>{{ maquina.setor }}</td>
+                <td>{{ maquina.get_status_display }}</td>
+                <td>
+                    <a href="{% url 'maquina_detail' maquina.pk %}" class="btn btn-primary btn-sm">Ver</a>
+                    <a href="{% url 'maquina_update' maquina.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">Nenhuma máquina cadastrada.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

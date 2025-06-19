@@ -1,0 +1,15 @@
+{% extends 'maquinas/base.html' %}
+{% block content %}
+{% load static %}
+<div class="text-center py-5">
+    <img src="{% static 'maquinas/logo-senai.png' %}" alt="SENAI" style="height: 90px; margin-bottom: 1.5rem;">
+    <h2 class="mb-4" style="font-size: 2.3rem;">Bem-vindo ao Sistema de Gestão de Máquinas SENAI</h2>
+    <p class="mb-5" style="font-size:1.25rem;">Gerencie máquinas, manutenções e relatórios de forma rápida, segura e padronizada conforme os melhores padrões SENAI-SP.</p>
+    <div class="d-flex justify-content-center flex-wrap gap-3">
+        <a href="{% url 'maquina_list' %}" class="btn btn-senai btn-lg">Máquinas</a>
+        <a href="{% url 'manutencao_list' %}" class="btn btn-senai btn-lg">Manutenções</a>
+        <a href="{% url 'peca_list' %}" class="btn btn-senai btn-lg">Peças</a>
+        <a href="{% url 'relatorios' %}" class="btn btn-senai btn-lg">Relatórios</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'maquinas/base.html' %}
+{% block content %}
+    <h2>Detalhes da Manutenção</h2>
+    <p><b>Máquina:</b> {{ manutencao.maquina }}</p>
+    <p><b>Tipo:</b> {{ manutencao.tipo }}</p>
+    <p><b>Data:</b> {{ manutencao.data }}</p>
+    <p><b>Status:</b> {{ manutencao.get_status_display }}</p>
+    <p><b>Responsável:</b> {{ manutencao.responsavel }}</p>
+    <p><b>Custo:</b> R$ {{ manutencao.custo }}</p>
+    <p><b>Descrição:</b> {{ manutencao.descricao }}</p>
+    <h4>Peças Utilizadas</h4>
+    <ul>
+        {% for peca_utilizada in manutencao.pecas_utilizadas.all %}
+            <li>{{ peca_utilizada.quantidade }}x {{ peca_utilizada.peca.nome }}</li>
+        {% empty %}
+            <li>Nenhuma peça utilizada.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'manutencao_update' manutencao.pk %}" class="btn btn-warning">Editar</a>
+    <a href="{% url 'manutencao_list' %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}

@@ -1,0 +1,153 @@
+{% extends 'maquinas/base.html' %}
+{% block content %}
+<h2>Relatórios e Gráficos</h2>
+
+<form method="get" class="row mb-4">
+    <div class="col-md-4">
+        <label for="setor" class="form-label">Filtrar por Setor:</label>
+        <select name="setor" id="setor" class="form-select">
+            <option value="">Todos</option>
+            {% for setor in setores %}
+                <option value="{{ setor.id }}" {% if filtros.setor == setor.id|stringformat:"s" %}selected{% endif %}>{{ setor.nome }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="ano" class="form-label">Filtrar por Ano:</label>
+        <select name="ano" id="ano" class="form-select">
+            <option value="">Todos</option>
+            {% for a in anos %}
+                <option value="{{ a }}" {% if filtros.ano == a|stringformat:"s" %}selected{% endif %}>{{ a }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-4 align-self-end">
+        <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+    </div>
+</form>
+
+<hr>
+
+<h4>Máquinas por Setor</h4>
+<canvas id="maqSetorChart" height="70"></canvas>
+
+<h4 class="mt-5">Manutenções por Tipo</h4>
+<canvas id="manutTipoChart" height="70"></canvas>
+
+{% if manut_por_mes %}
+<h4 class="mt-5">Custo Total de Manutenção por Mês ({{ filtros.ano }})</h4>
+<canvas id="manutMesChart" height="70"></canvas>
+{% endif %}
+
+<hr>
+
+<h5 class="mt-5">Resumo em Tabelas</h5>
+<strong>Máquinas por Setor:</strong>
+<table class="table table-bordered">
+    <tr><th>Setor</th><th>Total</th></tr>
+    {% for item in maq_por_setor %}
+        <tr><td>{{ item.setor__nome }}</td><td>{{ item.total }}</td></tr>
+    {% endfor %}
+</table>
+
+<strong>Manutenções por Tipo:</strong>
+<table class="table table-bordered">
+    <tr><th>Tipo</th><th>Total</th></tr>
+    {% for item in manut_por_tipo %}
+        <tr><td>{{ item.tipo__nome }}</td><td>{{ item.total }}</td></tr>
+    {% endfor %}
+</table>
+
+{% if manut_por_mes %}
+<strong>Custo total de Manutenção por Mês:</strong>
+<table class="table table-bordered">
+    <tr>
+        <th>Mês</th>
+        {% for m in meses %}
+        <th>{{ m }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>R$</td>
+        {% for total in manut_por_mes %}
+        <td>{{ total|floatformat:2 }}</td>
+        {% endfor %}
+    </tr>
+</table>
+{% endif %}
+
+<h4 class="mt-5">Custo Total de Manutenção Realizada por Máquina</h4>
+<table class="table table-bordered table-senai">
+    <thead>
+        <tr>
+            <th>Máquina</th>
+            <th>Nº Patrimônio</th>
+            <th>Custo Total (R$)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in custo_manutencao_por_maquina %}
+        <tr>
+            <td>{{ item.maquina__nome }}</td>
+            <td>{{ item.maquina__numero_patrimonio }}</td>
+            <td>R$ {{ item.total|floatformat:2 }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">Nenhuma manutenção concluída.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4 class="mt-5">Gráfico: Custo Total de Manutenção por Máquina</h4>
+<canvas id="custoManutencaoPorMaquinaChart" height="70"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Máquinas por setor
+    const maqSetorChart = new Chart(document.getElementById('maqSetorChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: [{% for item in maq_por_setor %}'{{ item.setor__nome }}',{% endfor %}],
+            datasets: [{
+                label: 'Máquinas',
+                data: [{% for item in maq_por_setor %}{{ item.total }},{% endfor %}]
+            }]
+        }
+    });
+    // Manutenções por tipo
+    const manutTipoChart = new Chart(document.getElementById('manutTipoChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: [{% for item in manut_por_tipo %}'{{ item.tipo__nome }}',{% endfor %}],
+            datasets: [{
+                label: 'Manutenções',
+                data: [{% for item in manut_por_tipo %}{{ item.total }},{% endfor %}]
+            }]
+        }
+    });
+    // Custo manutenção por mês (se existir)
+    {% if manut_por_mes %}
+    const manutMesChart = new Chart(document.getElementById('manutMesChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: [{% for m in meses %}'{{ m }}',{% endfor %}],
+            datasets: [{
+                label: 'Custo (R$)',
+                data: {{ manut_por_mes|safe }}
+            }]
+        }
+    });
+    {% endif %}
+    // Gráfico de custo de manutenção por máquina
+    const custoManutencaoPorMaquinaChart = new Chart(document.getElementById('custoManutencaoPorMaquinaChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: [{% for item in custo_manutencao_por_maquina %}'{{ item.maquina__nome }}',{% endfor %}],
+            datasets: [{
+                label: 'Custo (R$)',
+                data: [{% for item in custo_manutencao_por_maquina %}{{ item.total|floatformat:2 }},{% endfor %}]
+            }]
+        }
+    });
+</script>
+{% endblock %}

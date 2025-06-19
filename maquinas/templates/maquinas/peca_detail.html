@@ -1,0 +1,10 @@
+{% extends 'maquinas/base.html' %}
+{% block content %}
+    <h2>Detalhes da Peça</h2>
+    <p><strong>Nome:</strong> {{ peca.nome }}</p>
+    <p><strong>Fabricante:</strong> {{ peca.fabricante }}</p>
+    <p><strong>Código:</strong> {{ peca.codigo }}</p>
+    <p><strong>Descrição:</strong> {{ peca.descricao|linebreaks }}</p>
+    <a href="{% url 'peca_update' peca.pk %}" class="btn btn-warning">Editar</a>
+    <a href="{% url 'peca_list' %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'maquinas/base.html' %}
+{% block content %}
+    <h2>Manutenções</h2>
+    <a href="{% url 'manutencao_create' %}" class="btn btn-success mb-3">Nova Manutenção</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Máquina</th><th>Tipo</th><th>Data</th><th>Status</th><th>Detalhes</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for manutencao in manutencoes %}
+            <tr>
+                <td>{{ manutencao.maquina }}</td>
+                <td>{{ manutencao.tipo }}</td>
+                <td>{{ manutencao.data }}</td>
+                <td>{{ manutencao.get_status_display }}</td>
+                <td>
+                    <a href="{% url 'manutencao_detail' manutencao.pk %}" class="btn btn-primary btn-sm">Ver</a>
+                    <a href="{% url 'manutencao_update' manutencao.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="5">Nenhuma manutenção registrada.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

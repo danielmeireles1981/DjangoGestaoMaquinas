@@ -1,0 +1,17 @@
+{% extends 'maquinas/base.html' %}
+{% block content %}
+    <h2>Detalhes da Máquina</h2>
+    <p><strong>Nº Patrimônio:</strong> {{ maquina.numero_patrimonio }}</p>
+    <p><strong>Nome:</strong> {{ maquina.nome }}</p>
+    <p><strong>Setor:</strong> {{ maquina.setor }}</p>
+    <p><strong>Fabricante:</strong> {{ maquina.fabricante }}</p>
+    <p><strong>Fornecedor:</strong> {{ maquina.fornecedor }}</p>
+    <p><strong>Data de Aquisição:</strong> {{ maquina.data_aquisicao }}</p>
+    <p><strong>Status:</strong> {{ maquina.get_status_display }}</p>
+    <p><strong>Observações:</strong> {{ maquina.observacoes }}</p>
+    {% if maquina.imagem %}
+        <p><img src="{{ maquina.imagem.url }}" alt="Foto da Máquina" style="max-width:300px;"></p>
+    {% endif %}
+    <a href="{% url 'maquina_update' maquina.pk %}" class="btn btn-warning">Editar</a>
+    <a href="{% url 'maquina_list' %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}
