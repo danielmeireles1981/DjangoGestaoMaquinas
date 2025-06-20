@@ -8,13 +8,13 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'maquinas/senai.css' %}">
     <style>
-        body { font-family: 'Montserrat', Arial, sans-serif; }
+        body { font-family: 'Montserrat', Arial, sans-serif;  background: url("{% static 'maquinas/senai_rio_preto.jpg' %}") center center/cover no-repeat fixed !important;}
         .navbar-brand { font-weight: 900; letter-spacing: 1px; font-size: 1.5rem; }
         .nav-link, .navbar-text, .logout { font-weight: 600; letter-spacing: 0.5px; }
         .logout { color: #fff; }
         .logout:hover { text-decoration: underline; }
         .navbar { box-shadow: 0 2px 10px #0002; }
-        h2, h4 { color: #e30613; font-family: 'Montserrat', Arial, sans-serif; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;}
+        h2, h4 { color:rgb(12, 12, 12); font-family: 'Montserrat', Arial, sans-serif; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;}
         .btn-senai {
             background: #e30613;
             color: #fff;
@@ -73,9 +73,17 @@
             </div>
         </div>
     </nav>
+    
     <div class="container my-4">
         {% block content %}{% endblock %}
     </div>
+    
+    <!-- Footer corrigido com classe footer-senai -->
+    <footer class="footer-senai">
+        <p class="mb-0">DEV.Agile - CTDEV24</p>
+        <p class="mb-0">&copy; 2025 SENAI Rio Preto - Todos os direitos reservados.</p>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

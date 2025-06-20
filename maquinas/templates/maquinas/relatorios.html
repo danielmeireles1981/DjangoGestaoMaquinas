@@ -110,7 +110,9 @@
             labels: [{% for item in maq_por_setor %}'{{ item.setor__nome }}',{% endfor %}],
             datasets: [{
                 label: 'Máquinas',
-                data: [{% for item in maq_por_setor %}{{ item.total }},{% endfor %}]
+                data: [{% for item in maq_por_setor %}{{ item.total }},{% endfor %}],
+                backgroundColor: ['#00CED1'],
+                borderColor: ['#00CED1']
             }]
         }
     });
@@ -121,7 +123,9 @@
             labels: [{% for item in manut_por_tipo %}'{{ item.tipo__nome }}',{% endfor %}],
             datasets: [{
                 label: 'Manutenções',
-                data: [{% for item in manut_por_tipo %}{{ item.total }},{% endfor %}]
+                data: [{% for item in manut_por_tipo %}{{ item.total }},{% endfor %}],
+                backgroundColor: ['#00CED1'],
+                borderColor: ['#00CED1']
             }]
         }
     });
@@ -145,7 +149,9 @@
             labels: [{% for item in custo_manutencao_por_maquina %}'{{ item.maquina__nome }}',{% endfor %}],
             datasets: [{
                 label: 'Custo (R$)',
-                data: [{% for item in custo_manutencao_por_maquina %}{{ item.total|floatformat:2 }},{% endfor %}]
+                data: [{% for item in custo_manutencao_por_maquina %}{{ item.total|floatformat:2 }},{% endfor %}],
+                backgroundColor: ['#00CED1'],
+                borderColor: ['#00CED1']
             }]
         }
     });

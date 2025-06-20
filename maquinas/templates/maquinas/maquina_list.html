@@ -1,7 +1,7 @@
 {% extends 'maquinas/base.html' %}
 {% block content %}
     <h2>Máquinas Cadastradas</h2>
-    <a href="{% url 'maquina_create' %}" class="btn btn-success mb-3">Nova Máquina</a>
+    <a href="{% url 'maquina_create' %}" class="btn btn-senai mb-3">Nova Máquina</a>
     <form method="get" class="row mb-3">
     <div class="col-md-4">
         <select name="status" class="form-select">
@@ -23,7 +23,7 @@
         <button class="btn btn-primary" type="submit">Filtrar</button>
     </div>
 </form>
-    <table class="table table-bordered table-striped">
+    <table class="table table-striped table-senai">
         <thead>
             <tr>
                 <th>Nº Patrimônio</th>

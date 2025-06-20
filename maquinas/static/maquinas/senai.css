@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap');
+
+/* Fundo principal com textura suave (você pode trocar o URL para outro padrão ou imagem leve!) */
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #f7f7f7 url('https://www.transparenttextures.com/patterns/symphony.png');
+    /* Ou use um fundo liso: background: #f7f7f7; */
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Wrapper para o conteúdo principal */
+.container {
+    flex: 1;
+}
+
+/* Header e Navbar customizados SENAI */
+.navbar {
+    background: #e30613 !important;
+    box-shadow: 0 2px 8px #0001;
+}
+
+.navbar-brand, .navbar .nav-link, .navbar .logout {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #fff !important;
+}
+
+.navbar .nav-link.active, .navbar .nav-link:hover {
+    color: #ffc107 !important;
+    text-decoration: underline;
+}
+
+/* Botão padrão SENAI */
+.btn-senai, .btn-primary, .btn-danger, .btn-warning {
+    background: #e30613 !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    border: none;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+    box-shadow: 0 1px 4px #0002;
+}
+.btn-senai:hover, .btn-primary:hover, .btn-danger:hover, .btn-warning:hover {
+    background: #9a1915 !important;
+    color: #fff !important;
+}
+
+/* Card estilo SENAI */
+.card {
+    border: 1.5px solid #e30613;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px #0001;
+    margin-bottom: 2rem;
+}
+.card-header, .table-senai th {
+    background: #e30613 !important;
+    color: #fff !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* Tabela estilizada SENAI */
+.table-senai th, .table-senai thead th {
+    background: #e30613;
+    color: #fff;
+    border-color: #e30613;
+}
+.table-senai td, .table-senai tbody td {
+    background: #fff;
+    color: #333;
+    font-size: 1rem;
+    border-color: #e9e9e9;
+}
+.table-senai tr:nth-child(even) td {
+    background: #fafafa;
+}
+.table-bordered {
+    border-color: #e30613 !important;
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5 {
+    color: #e30613;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+hr {
+    border-top: 2px solid #e30613;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Inputs e selects */
+input, select, textarea {
+    border-radius: 4px !important;
+    border: 1.2px solid #878787 !important;
+    font-family: 'Montserrat', Arial, sans-serif !important;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: #e30613 !important;
+    box-shadow: 0 0 5px #e3061344;
+}
+
+/* Rodapé - CORRIGIDO para aparecer no final da página */
+.footer-senai {
+    width: 100%;
+    background: #e30613;
+    color: #fff;
+    padding: 16px 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    margin-top: auto; /* Isso empurra o footer para baixo */
+    flex-shrink: 0; /* Evita que o footer encolha */
+}
+
+/* Imagem de fundo home (apenas home, usando uma classe) */
+.bg-home-senai {
+    min-height: 350px;
+    border-radius: 16px;
+    box-shadow: 0 4px 40px #e3061325;
+    margin-bottom: 3rem;
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+    h2, h3 { font-size: 1.3rem !important; }
+    .navbar-brand { font-size: 1.1rem; }
+    .card { margin-bottom: 1rem; }
+    .btn-senai, .btn-primary { font-size: 1rem !important; padding: 8px 16px !important;}
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #fff;
+}
+::-webkit-scrollbar-thumb {
+    background: #e30613;
+    border-radius: 8px;
+}
+
+/* Logo SENAI centralizada na home */
+.logo-home {
+    background: rgba(255,255,255,0.90);
+    border-radius: 16px;
+    box-shadow: 0 2px 18px #e3061320;
+    display: inline-block;
+    padding: 18px 36px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100% !important;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    padding: 8px 10px;
+    margin-bottom: 0.5rem;
+}
+label {
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #e30613 !important;
+    box-shadow: 0 0 5px #e3061344;
+}
